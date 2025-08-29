@@ -1,10 +1,52 @@
 "use client"
 
 import Link from "next/link"
+import { useState } from "react"
+import Navigation from "../components/navigation"
 
 export default function HomePage() {
+  const [email, setEmail] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    setErrorMessage("")
+
+    try {
+      const response = await fetch('/api/beta-signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          source: 'homepage'
+        })
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        setEmail("")
+      } else {
+        setSubmitStatus('error')
+        setErrorMessage(data.error || "Something went wrong. Please try again.")
+      }
+    } catch (error) {
+      setSubmitStatus('error')
+      setErrorMessage("Network error. Please check your connection and try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
   return (
     <div>
+      <Navigation />
       <div className="floating-shapes"></div>
 
       <div className="hero">
@@ -72,24 +114,47 @@ export default function HomePage() {
               </p>
             </div>
 
-            <form id="beta-signup-form" className="beta-form" aria-label="Beta signup form">
-              <input
-                type="email"
-                name="email"
-                placeholder="Your email address"
-                required
-                className="beta-input"
-                aria-label="Email address"
-                autoComplete="email"
-              />
-              <button type="submit" className="beta-btn" aria-label="Claim your early access">
-                Claim Your Early Access Now
-              </button>
-            </form>
+            {submitStatus !== 'success' ? (
+              <form onSubmit={handleSubmit} className="beta-form" aria-label="Beta signup form">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your email address"
+                  required
+                  disabled={isSubmitting}
+                  className="beta-input"
+                  aria-label="Email address"
+                  autoComplete="email"
+                />
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting || !email}
+                  className="beta-btn" 
+                  aria-label="Claim your early access"
+                >
+                  {isSubmitting ? "Signing Up..." : "Claim Your Early Access Now"}
+                </button>
+              </form>
+            ) : (
+              <div className="beta-success" role="status" aria-live="polite">
+                Thank you! You're on the list. We'll be in touch soon.
+              </div>
+            )}
 
-            <div id="beta-signup-success" className="beta-success" role="status" aria-live="polite">
-              Thank you! You're on the list. We'll be in touch soon.
-            </div>
+            {submitStatus === 'error' && (
+              <div className="beta-error" role="alert" style={{
+                color: '#ff4444',
+                textAlign: 'center',
+                marginTop: '1rem',
+                padding: '0.5rem',
+                backgroundColor: '#ffe6e6',
+                border: '1px solid #ff4444',
+                borderRadius: '8px'
+              }}>
+                {errorMessage}
+              </div>
+            )}
 
             <div className="supporting-line beta-supporting">
               Now Beta Testing: Only 500 couples will get in. Claim your spot before they're gone.
@@ -172,8 +237,6 @@ export default function HomePage() {
           padding: 8rem 2rem 4rem;
           position: relative;
           z-index: 2;
-          background: rgba(255, 248, 231, 0.8);
-          backdrop-filter: blur(10px);
         }
 
         .hero h1 {
@@ -220,6 +283,8 @@ export default function HomePage() {
           margin: 4rem 0;
           position: relative;
           z-index: 2;
+          animation: fadeInUp 1s ease-out 1.2s both;
+          opacity: 0;
         }
 
         .connection-line {

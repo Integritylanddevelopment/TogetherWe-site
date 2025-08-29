@@ -9,13 +9,39 @@ import Navigation from "../../components/navigation"
 export default function PricingPage() {
   const [betaEmail, setBetaEmail] = useState("")
   const [betaSignupSuccess, setBetaSignupSuccess] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleBetaSignup = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Connect to Supabase database
-    console.log("[v0] Beta signup email:", betaEmail)
-    setBetaSignupSuccess(true)
-    setBetaEmail("")
+    setIsSubmitting(true)
+    setErrorMessage("")
+
+    try {
+      const response = await fetch('/api/beta-signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: betaEmail,
+          source: 'pricing'
+        })
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setBetaSignupSuccess(true)
+        setBetaEmail("")
+      } else {
+        setErrorMessage(data.error || "Something went wrong. Please try again.")
+      }
+    } catch (error) {
+      setErrorMessage("Network error. Please check your connection and try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -23,12 +49,18 @@ export default function PricingPage() {
       <Navigation />
 
       <div className="hero">
-        <h1>Choose Your Relationship Journey</h1>
+        <h1>Choose Your Journey</h1>
         <div className="tagline">AI-Powered Couples Coaching & Support</div>
         <div className="subtitle">
           Revolutionary relationship support that adapts to your unique dynamics, providing personalized insights and
           coaching guidance to strengthen your connection.
         </div>
+      </div>
+
+      <div className="heart-divider">
+        <div className="connection-line"></div>
+        <div className="heart"></div>
+        <div className="connection-line"></div>
       </div>
 
       <div className="coming-soon-section">
@@ -42,19 +74,36 @@ export default function PricingPage() {
             </p>
 
             {!betaSignupSuccess ? (
-              <form onSubmit={handleBetaSignup} className="beta-form">
-                <input
-                  type="email"
-                  value={betaEmail}
-                  onChange={(e) => setBetaEmail(e.target.value)}
-                  placeholder="Enter your email for beta access"
-                  required
-                  className="beta-input"
-                />
-                <button type="submit" className="beta-btn">
-                  Join Beta Testing Group
-                </button>
-              </form>
+              <>
+                <form onSubmit={handleBetaSignup} className="beta-form">
+                  <input
+                    type="email"
+                    value={betaEmail}
+                    onChange={(e) => setBetaEmail(e.target.value)}
+                    placeholder="Enter your email for beta access"
+                    required
+                    disabled={isSubmitting}
+                    className="beta-input"
+                  />
+                  <button type="submit" disabled={isSubmitting || !betaEmail} className="beta-btn">
+                    {isSubmitting ? "Joining..." : "Join Beta Testing Group"}
+                  </button>
+                </form>
+                
+                {errorMessage && (
+                  <div className="beta-error" style={{
+                    color: '#ff4444',
+                    textAlign: 'center',
+                    marginTop: '1rem',
+                    padding: '0.5rem',
+                    backgroundColor: '#ffe6e6',
+                    border: '1px solid #ff4444',
+                    borderRadius: '8px'
+                  }}>
+                    {errorMessage}
+                  </div>
+                )}
+              </>
             ) : (
               <div className="beta-success">
                 <div className="success-icon">✓</div>
@@ -154,14 +203,13 @@ export default function PricingPage() {
 
         .hero {
           text-align: center;
-          padding: 6rem 2rem 4rem;
+          padding: 8rem 2rem 4rem;
           position: relative;
-          background: rgba(255, 248, 231, 0.8);
-          backdrop-filter: blur(10px);
+          z-index: 2;
         }
 
         .hero h1 {
-          font-size: 4rem;
+          font-size: 6rem;
           font-weight: 300;
           color: #d84315;
           text-shadow: 3px 3px 6px rgba(216, 67, 21, 0.3);
@@ -197,6 +245,80 @@ export default function PricingPage() {
           }
         }
 
+        .heart-divider {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 4rem 0;
+          position: relative;
+          z-index: 2;
+          animation: fadeInUp 1s ease-out forwards;
+          animation-delay: 0.9s;
+          opacity: 0;
+        }
+
+        .connection-line {
+          width: 100px;
+          height: 4px;
+          background: linear-gradient(90deg, #ff7043, #ffab91, #ff7043);
+          margin: 0 20px;
+        }
+
+        .heart {
+          width: 60px;
+          height: 60px;
+          background: #ff5722;
+          position: relative;
+          transform: rotate(-45deg);
+          animation: heartbeat 1.5s ease-in-out infinite;
+          margin: 0 20px;
+        }
+
+        .heart.small {
+          width: 30px;
+          height: 30px;
+          margin: 0 10px;
+        }
+
+        .heart::before,
+        .heart::after {
+          content: '';
+          width: 60px;
+          height: 60px;
+          position: absolute;
+          background: #ff5722;
+          border-radius: 50%;
+        }
+
+        .heart.small::before,
+        .heart.small::after {
+          width: 30px;
+          height: 30px;
+        }
+
+        .heart::before {
+          top: -30px;
+          left: 0;
+        }
+
+        .heart.small::before {
+          top: -15px;
+        }
+
+        .heart::after {
+          left: 30px;
+          top: 0;
+        }
+
+        .heart.small::after {
+          left: 15px;
+        }
+
+        @keyframes heartbeat {
+          0%, 100% { transform: rotate(-45deg) scale(1); }
+          50% { transform: rotate(-45deg) scale(1.1); }
+        }
+
         .container {
           max-width: 1200px;
           margin: 0 auto;
@@ -206,6 +328,9 @@ export default function PricingPage() {
         .coming-soon-section {
           padding: 4rem 0;
           background: rgba(255, 255, 255, 0.9);
+          animation: fadeInUp 1s ease-out forwards;
+          animation-delay: 1.2s;
+          opacity: 0;
         }
 
         .coming-soon-card {
@@ -364,7 +489,7 @@ export default function PricingPage() {
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(255, 255, 255, 0.85);
+          background: rgba(255, 255, 255, 0.3);
           display: flex;
           align-items: center;
           justify-content: center;

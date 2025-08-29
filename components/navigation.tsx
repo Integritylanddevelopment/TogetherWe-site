@@ -11,7 +11,7 @@ export default function Navigation() {
           <div className="hidden md:flex items-center justify-center gap-4 lg:gap-6 xl:gap-8">
             <Link 
               href="/" 
-              className="text-orange-600 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-500 font-serif font-medium px-6 py-4 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:border-2"
+              className="text-orange-600 hover:text-orange-700 font-serif font-medium px-6 py-4 rounded-lg transition-colors duration-200"
               style={{ 
                 fontFamily: 'Georgia, serif',
                 color: '#d84315',
@@ -24,7 +24,7 @@ export default function Navigation() {
 
             <Link 
               href="/relationship-roadmap" 
-              className="text-orange-600 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-500 font-serif font-medium px-6 py-4 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:border-2"
+              className="text-orange-600 hover:text-orange-700 font-serif font-medium px-6 py-4 rounded-lg transition-colors duration-200"
               style={{ 
                 fontFamily: 'Georgia, serif',
                 color: '#d84315',
@@ -37,7 +37,7 @@ export default function Navigation() {
 
             <Link 
               href="/heart-behind-the-code" 
-              className="text-orange-600 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-500 font-serif font-medium px-6 py-4 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:border-2"
+              className="text-orange-600 hover:text-orange-700 font-serif font-medium px-6 py-4 rounded-lg transition-colors duration-200"
               style={{ 
                 fontFamily: 'Georgia, serif',
                 color: '#d84315',
@@ -50,7 +50,7 @@ export default function Navigation() {
 
             <Link 
               href="/context-injection" 
-              className="text-orange-600 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-500 font-serif font-medium px-6 py-4 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:border-2"
+              className="text-orange-600 hover:text-orange-700 font-serif font-medium px-6 py-4 rounded-lg transition-colors duration-200"
               style={{ 
                 fontFamily: 'Georgia, serif',
                 color: '#d84315',
@@ -63,7 +63,7 @@ export default function Navigation() {
 
             <Link 
               href="/pricing" 
-              className="text-orange-600 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-500 font-serif font-medium px-6 py-4 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:border-2"
+              className="text-orange-600 hover:text-orange-700 font-serif font-medium px-6 py-4 rounded-lg transition-colors duration-200"
               style={{ 
                 fontFamily: 'Georgia, serif',
                 color: '#d84315',
@@ -82,7 +82,7 @@ export default function Navigation() {
             {/* All buttons same style on mobile, center button first */}
             <Link 
               href="/heart-behind-the-code" 
-              className="w-11/12 text-center text-orange-600 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-500 font-serif font-medium py-4 rounded-lg transition-all duration-300 hover:border-2"
+              className="w-11/12 text-center text-orange-600 hover:text-orange-700 font-serif font-medium py-4 rounded-lg transition-colors duration-200"
               style={{ 
                 fontFamily: 'Georgia, serif',
                 color: '#d84315',
@@ -97,7 +97,7 @@ export default function Navigation() {
             <div className="w-11/12 grid grid-cols-2 gap-3">
               <Link 
                 href="/" 
-                className="text-center text-orange-600 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-500 font-serif font-medium py-3 rounded-lg transition-all duration-300 hover:border-2"
+                className="text-center text-orange-600 hover:text-orange-700 font-serif font-medium py-3 rounded-lg transition-colors duration-200"
                 style={{ 
                   fontFamily: 'Georgia, serif',
                   color: '#d84315',
@@ -109,7 +109,7 @@ export default function Navigation() {
               </Link>
               <Link 
                 href="/pricing" 
-                className="text-center text-orange-600 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-500 font-serif font-medium py-3 rounded-lg transition-all duration-300 hover:border-2"
+                className="text-center text-orange-600 hover:text-orange-700 font-serif font-medium py-3 rounded-lg transition-colors duration-200"
                 style={{ 
                   fontFamily: 'Georgia, serif',
                   color: '#d84315',
@@ -124,7 +124,7 @@ export default function Navigation() {
             <div className="w-11/12 grid grid-cols-2 gap-3">
               <Link 
                 href="/relationship-roadmap" 
-                className="text-center text-orange-600 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-500 font-serif font-medium py-3 rounded-lg transition-all duration-300 hover:border-2"
+                className="text-center text-orange-600 hover:text-orange-700 font-serif font-medium py-3 rounded-lg transition-colors duration-200"
                 style={{ 
                   fontFamily: 'Georgia, serif',
                   color: '#d84315',
@@ -136,7 +136,7 @@ export default function Navigation() {
               </Link>
               <Link 
                 href="/context-injection" 
-                className="text-center text-orange-600 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-500 font-serif font-medium py-3 rounded-lg transition-all duration-300 hover:border-2"
+                className="text-center text-orange-600 hover:text-orange-700 font-serif font-medium py-3 rounded-lg transition-colors duration-200"
                 style={{ 
                   fontFamily: 'Georgia, serif',
                   color: '#d84315',

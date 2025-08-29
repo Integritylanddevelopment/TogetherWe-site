@@ -14,6 +14,13 @@ export default function HeartBehindTheCodePage() {
         <div className="tagline">Bridging Hearts and Minds Through Technology</div>
       </div>
 
+      <div className="container">
+        <div className="quote-section">
+          <div className="quote-text">"Where AI Meets the Human Heart"</div>
+          <div className="quote-author">Understanding the soul behind the technology</div>
+        </div>
+      </div>
+
       <div className="heart-divider">
         <div className="connection-line"></div>
         <div className="heart"></div>
@@ -21,10 +28,6 @@ export default function HeartBehindTheCodePage() {
       </div>
 
       <div className="container">
-        <div className="quote-section">
-          <div className="quote-text">"Where AI Meets the Human Heart"</div>
-          <div className="quote-author">Understanding the soul behind the technology</div>
-        </div>
 
         <section className="section">
           <h2 className="section-title">The Human Touch in Digital Minds</h2>
@@ -229,15 +232,13 @@ export default function HeartBehindTheCodePage() {
 
         .hero {
           text-align: center;
-          padding: 6rem 2rem 4rem;
+          padding: 8rem 2rem 4rem;
           position: relative;
           z-index: 2;
-          background: rgba(255, 248, 231, 0.8);
-          backdrop-filter: blur(10px);
         }
 
         .hero h1 {
-          font-size: 4rem;
+          font-size: 6rem;
           font-weight: 300;
           color: #d84315;
           text-shadow: 3px 3px 6px rgba(216, 67, 21, 0.3);
@@ -246,7 +247,7 @@ export default function HeartBehindTheCodePage() {
         }
 
         .tagline {
-          font-size: 1.8rem;
+          font-size: 2rem;
           color: #8d6e63;
           margin-bottom: 2rem;
           font-weight: 300;
@@ -271,6 +272,7 @@ export default function HeartBehindTheCodePage() {
           margin: 4rem 0;
           position: relative;
           z-index: 2;
+          animation: fadeInUp 1s ease-out 0.9s both;
         }
 
         .connection-line {
@@ -337,6 +339,7 @@ export default function HeartBehindTheCodePage() {
           padding: 3rem;
           border-radius: 20px;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          animation: fadeInUp 1s ease-out 0.6s both;
         }
 
         .quote-text {

@@ -1,22 +1,19 @@
 "use client"
 
+import Navigation from "../../components/navigation"
+
 export default function RelationshipRoadmapPage() {
   return (
     <div>
+      <Navigation />
       <div className="floating-shapes"></div>
       
       <div className="hero">
-        <h1>The Relationship Roadmap</h1>
+        <h1>Relationship Roadmap</h1>
         <div className="subtitle">
           Understanding how AI can transform your relationship journey through personalized coaching, 
           deeper connections, and lasting emotional growth.
         </div>
-      </div>
-
-      <div className="heart-divider">
-        <div className="connection-line"></div>
-        <div className="heart"></div>
-        <div className="connection-line"></div>
       </div>
 
       <div className="container">
@@ -55,12 +52,6 @@ export default function RelationshipRoadmapPage() {
               <p>Receive customized exercises, communication strategies, and healing practices designed specifically for your relationship's journey toward deeper connection.</p>
             </div>
           </div>
-        </div>
-
-        <div className="heart-divider">
-          <div className="connection-line"></div>
-          <div className="heart"></div>
-          <div className="connection-line"></div>
         </div>
 
         <div className="categories compact">
@@ -206,15 +197,13 @@ export default function RelationshipRoadmapPage() {
 
         .hero {
           text-align: center;
-          padding: 4rem 2rem 2rem;
+          padding: 8rem 2rem 2rem;
           position: relative;
           z-index: 2;
-          background: rgba(255, 248, 231, 0.8);
-          backdrop-filter: blur(10px);
         }
 
         .hero h1 {
-          font-size: 4.5rem;
+          font-size: 6rem;
           font-weight: 300;
           color: #d84315;
           text-shadow: 3px 3px 6px rgba(216, 67, 21, 0.3);
@@ -249,6 +238,8 @@ export default function RelationshipRoadmapPage() {
           margin: 4rem 0;
           position: relative;
           z-index: 2;
+          animation: fadeInUp 1s ease-out 0.9s both;
+          opacity: 0;
         }
 
         .connection-line {
@@ -310,11 +301,13 @@ export default function RelationshipRoadmapPage() {
 
         .quote-section {
           text-align: center;
-          margin: 4rem 0;
+          margin: 2rem 0 4rem;
           padding: 3rem;
-          background: rgba(255, 255, 255, 0.9);
+          background: rgba(255, 255, 255, 0.95);
           border-radius: 25px;
           box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+          animation: fadeInUp 1s ease-out 0.6s both;
+          opacity: 0;
         }
 
         .quote-text {
@@ -355,6 +348,8 @@ export default function RelationshipRoadmapPage() {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 2rem;
+          animation: fadeInUp 1s ease-out 1.2s both;
+          opacity: 0;
         }
 
         .categories.compact {

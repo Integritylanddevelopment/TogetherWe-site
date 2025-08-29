@@ -38,16 +38,24 @@ export default function ContextInjectionPage() {
   return (
     <div>
       <Navigation />
+      <div className="floating-shapes"></div>
 
-      <div className="presentation-container">
-        <div className="header">
-          <h1>TogetherWe<br />Context Injection Engine</h1>
-          <p>
-            How 20 Emotional Intelligence Engines work together with the Context Injection Engine to deliver
-            personalized, precise coaching insights tailored specifically to each couple
-          </p>
+      <div className="hero">
+        <h1>How It Works</h1>
+        <div className="tagline">AI-Powered Relationship Intelligence</div>
+        <div className="subtitle">
+          How 20 Emotional Intelligence Engines work together with the Context Injection Engine to deliver
+          personalized, precise coaching insights tailored specifically to each couple
         </div>
+      </div>
 
+      <div className="heart-divider">
+        <div className="connection-line"></div>
+        <div className="heart"></div>
+        <div className="connection-line"></div>
+      </div>
+
+      <div className="container">
         <div className="tab-container">
           <div className="tab-list" style={{ justifyContent: 'center', display: 'flex', flexWrap: 'wrap' }}>
             <button
@@ -170,7 +178,6 @@ export default function ContextInjectionPage() {
                 {engines.map((engine) => (
                   <div key={engine.id} className="engine-card">
                     <h3>
-                      <span className="engine-number" style={{ minWidth: '2rem', display: 'inline-block' }}>{engine.id}</span>
                       <span style={{ wordBreak: 'break-word' }}>{engine.name}</span>
                     </h3>
                     <p>{engine.focus}</p>
@@ -535,7 +542,191 @@ export default function ContextInjectionPage() {
         </div>
       </div>
 
+      <div className="heart-divider">
+        <div className="connection-line"></div>
+        <div className="heart"></div>
+        <div className="connection-line"></div>
+      </div>
+
       <style jsx>{`
+        body {
+          font-family: 'Georgia', serif;
+          background: linear-gradient(135deg, #fff8e7 0%, #ffe4b5 50%, #ffb347 100%);
+          min-height: 100vh;
+          color: #5d4037;
+          line-height: 1.7;
+        }
+
+        .hero {
+          text-align: center;
+          padding: 8rem 2rem;
+          position: relative;
+          z-index: 2;
+        }
+
+        .hero h1 {
+          font-size: 6rem;
+          font-weight: 300;
+          color: #d84315;
+          text-shadow: 3px 3px 6px rgba(216, 67, 21, 0.3);
+          margin-bottom: 1rem;
+          animation: fadeInUp 1s ease-out;
+        }
+
+        .tagline {
+          font-size: 2rem;
+          color: #8d6e63;
+          margin-bottom: 2rem;
+          font-weight: 300;
+          animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .subtitle {
+          font-size: 1.3rem;
+          color: #8d6e63;
+          max-width: 800px;
+          margin: 0 auto 1rem;
+          line-height: 1.6;
+          animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .heart-divider {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 2rem 0;
+          position: relative;
+          z-index: 2;
+          animation: fadeInUp 1s ease-out forwards;
+          animation-delay: 0.9s;
+          opacity: 0;
+        }
+
+        .connection-line {
+          width: 100px;
+          height: 4px;
+          background: linear-gradient(90deg, #ff7043, #ffab91, #ff7043);
+          margin: 0 20px;
+        }
+
+        .heart {
+          width: 60px;
+          height: 60px;
+          background: #ff5722;
+          position: relative;
+          transform: rotate(-45deg);
+          animation: heartbeat 1.5s ease-in-out infinite;
+          margin: 0 20px;
+        }
+
+        .heart.small {
+          width: 30px;
+          height: 30px;
+          margin: 0 10px;
+        }
+
+        .heart::before,
+        .heart::after {
+          content: '';
+          width: 60px;
+          height: 60px;
+          position: absolute;
+          background: #ff5722;
+          border-radius: 50%;
+        }
+
+        .heart.small::before,
+        .heart.small::after {
+          width: 30px;
+          height: 30px;
+        }
+
+        .heart::before {
+          top: -30px;
+          left: 0;
+        }
+
+        .heart.small::before {
+          top: -15px;
+        }
+
+        .heart::after {
+          left: 30px;
+          top: 0;
+        }
+
+        .heart.small::after {
+          left: 15px;
+        }
+
+        @keyframes heartbeat {
+          0%, 100% { transform: rotate(-45deg) scale(1); }
+          50% { transform: rotate(-45deg) scale(1.1); }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+          position: relative;
+          z-index: 2;
+        }
+
+        .floating-shapes {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 1;
+          overflow: hidden;
+        }
+
+        .floating-shapes::before,
+        .floating-shapes::after {
+          content: '';
+          position: absolute;
+          border-radius: 50%;
+          opacity: 0.1;
+          animation: float 20s infinite ease-in-out;
+        }
+
+        .floating-shapes::before {
+          width: 300px;
+          height: 300px;
+          background: radial-gradient(circle, #ff7043, #ffab91);
+          top: 20%;
+          left: -100px;
+          animation-delay: -10s;
+        }
+
+        .floating-shapes::after {
+          width: 200px;
+          height: 200px;
+          background: radial-gradient(circle, #ffab91, #ff7043);
+          bottom: 10%;
+          right: -50px;
+          animation-delay: -5s;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33% { transform: translateY(-30px) rotate(120deg); }
+          66% { transform: translateY(20px) rotate(240deg); }
+        }
+
         .gradient-text {
           background: linear-gradient(135deg, #9333ea, #ec4899, #3b82f6);
           -webkit-background-clip: text;
@@ -577,16 +768,21 @@ export default function ContextInjectionPage() {
         }
 
         .header h1 {
-          font-size: 4.5rem;
+          font-size: 6rem;
           font-weight: 300;
           color: #d84315;
           text-shadow: 2px 2px 4px rgba(216, 67, 21, 0.2);
           margin-bottom: 1rem;
+          animation: fadeInUp 1s ease-out forwards;
         }
 
         .header p {
           font-size: 1.3rem;
           color: #8d6e63;
+          animation: fadeInUp 1s ease-out forwards;
+          animation-delay: 0.3s;
+          opacity: 0;
+        }
           max-width: 800px;
           margin: 0 auto;
           line-height: 1.6;
@@ -603,6 +799,9 @@ export default function ContextInjectionPage() {
           margin-bottom: 2rem;
           border-bottom: 2px solid #ffe4b5;
           padding-bottom: 1rem;
+          animation: fadeInUp 1s ease-out forwards;
+          animation-delay: 1.2s;
+          opacity: 0;
         }
 
         .tab-button {
@@ -707,6 +906,9 @@ export default function ContextInjectionPage() {
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 1.5rem;
           margin: 1.5rem 0;
+          animation: fadeInUp 1s ease-out forwards;
+          animation-delay: 0.6s;
+          opacity: 0;
         }
 
         .engine-card {
