@@ -6,131 +6,6 @@ export default function Footer() {
   useEffect(() => {
     // Modal content data
     const TW_PAGES = {
-      "/about": {
-        title: "About Us",
-        html: `
-          <h4>Our Mission</h4>
-          <p>TogetherWe is dedicated to strengthening relationships through AI-powered coaching and support tools. We believe that healthy relationships are the foundation of a fulfilling life.</p>
-          
-          <h4>What We Do</h4>
-          <p>We provide personalized relationship guidance, communication tools, and evidence-based coaching techniques to help couples navigate challenges and deepen their connection.</p>
-          
-          <h4>Our Approach</h4>
-          <ul>
-            <li>AI-powered insights based on relationship science</li>
-            <li>Personalized guidance for your unique situation</li>
-            <li>Privacy-focused and secure platform</li>
-            <li>Accessible 24/7 support when you need it</li>
-          </ul>
-          
-          <h4>Important Note</h4>
-          <p>TogetherWe is designed to complement, not replace, professional therapy or counseling. For serious relationship issues or mental health concerns, we encourage seeking qualified professional help.</p>
-        `
-      },
-      "/faq": {
-        title: "Frequently Asked Questions",
-        html: `
-          <h4>What is TogetherWe?</h4>
-          <p>TogetherWe is an AI-powered relationship coaching platform that provides personalized guidance and tools to help couples improve their communication and strengthen their bond.</p>
-          
-          <h4>Is this therapy or counseling?</h4>
-          <p><strong>No.</strong> TogetherWe is not therapy, counseling, or medical advice. We provide educational content and coaching tools, but do not replace professional mental health services.</p>
-          
-          <h4>How does it work?</h4>
-          <p>Our AI analyzes your inputs and provides personalized suggestions, exercises, and insights based on proven relationship science and communication techniques.</p>
-          
-          <h4>Is my information private?</h4>
-          <p>Yes, we take privacy seriously. Your conversations and data are encrypted and secure. See our Privacy Policy for full details.</p>
-          
-          <h4>When should I seek professional help instead?</h4>
-          <p>For serious relationship issues, abuse, mental health concerns, or crisis situations, please consult with licensed professionals. Call 911 or 988 for emergencies.</p>
-          
-          <h4>How much does it cost?</h4>
-          <p>Visit our <a href="/pricing" onclick="event.stopPropagation();">pricing page</a> for current subscription options and pricing details.</p>
-        `
-      },
-      "/investors": {
-        title: "Investor Information",
-        html: `
-          <h4>Investment Opportunity</h4>
-          <p>TogetherWe is transforming how couples access relationship support through innovative AI technology and evidence-based coaching methods.</p>
-          
-          <h4>Market Opportunity</h4>
-          <ul>
-            <li>Growing relationship coaching and wellness market</li>
-            <li>Increasing demand for accessible mental health resources</li>
-            <li>AI-powered personalization at scale</li>
-            <li>24/7 availability addressing unmet needs</li>
-          </ul>
-          
-          <h4>Our Advantage</h4>
-          <ul>
-            <li>Proprietary AI models trained on relationship science</li>
-            <li>Privacy-first approach building user trust</li>
-            <li>Scalable technology platform</li>
-            <li>Experienced team in both technology and relationships</li>
-          </ul>
-          
-          <h4>Contact</h4>
-          <p>For investment inquiries, please reach out to our team at <a href="mailto:investors@togetherwelove.app">investors@togetherwelove.app</a></p>
-          
-          <p><small>This is not an offer to sell securities. Any investment involves risk.</small></p>
-        `
-      },
-      "/accessibility": {
-        title: "Accessibility Statement",
-        html: `
-          <h4>Our Commitment</h4>
-          <p>TogetherWe is committed to ensuring our platform is accessible to all users, including those with disabilities. We strive to meet WCAG 2.1 AA accessibility standards.</p>
-          
-          <h4>Accessibility Features</h4>
-          <ul>
-            <li>Keyboard navigation support</li>
-            <li>Screen reader compatibility</li>
-            <li>High contrast mode options</li>
-            <li>Adjustable text sizes</li>
-            <li>Clear, simple language</li>
-          </ul>
-          
-          <h4>Ongoing Improvements</h4>
-          <p>We regularly audit and improve our accessibility features. Our development process includes accessibility testing and user feedback integration.</p>
-          
-          <h4>Feedback</h4>
-          <p>If you encounter any accessibility barriers or have suggestions for improvement, please contact us at <a href="mailto:accessibility@togetherwelove.app">accessibility@togetherwelove.app</a></p>
-          
-          <h4>Third-Party Tools</h4>
-          <p>We work with accessibility experts and use industry-standard tools to ensure our platform serves all users effectively.</p>
-        `
-      },
-      "/contact": {
-        title: "Contact Us",
-        html: `
-          <h4>Get in Touch</h4>
-          <p>We'd love to hear from you. Reach out with questions, feedback, or support needs.</p>
-          
-          <h4>Support</h4>
-          <p><strong>Email:</strong> <a href="mailto:support@TogetherWe.app">support@TogetherWe.app</a><br>
-          <strong>Response Time:</strong> Within 24 hours</p>
-          
-          <h4>Business Inquiries</h4>
-          <p><strong>General:</strong> <a href="mailto:hello@togetherwelove.app">hello@togetherwelove.app</a><br>
-          <strong>Partnerships:</strong> <a href="mailto:partnerships@togetherwelove.app">partnerships@togetherwelove.app</a></p>
-          
-          <h4>Privacy & Legal</h4>
-          <p><strong>Privacy:</strong> <a href="mailto:privacy@togetherwelove.app">privacy@togetherwelove.app</a><br>
-          <strong>Legal:</strong> <a href="mailto:legal@togetherwelove.app">legal@togetherwelove.app</a></p>
-          
-          <h4>Office</h4>
-          <address>
-            TogetherWe Media Group LLC<br>
-            3225 Mcleod Drive, Suite 100<br>
-            Las Vegas, NV 89121
-          </address>
-          
-          <h4>Emergency Resources</h4>
-          <p>For crisis situations: Call <strong>911</strong> or text <strong>988</strong> for the Suicide & Crisis Lifeline.</p>
-        `
-      },
       "/privacy": {
         title: "Privacy Policy",
         html: `
@@ -466,13 +341,13 @@ export default function Footer() {
           color: #cbd3df; 
         }
         .disclaimer { 
-          font-size: 2.5rem; 
-          color: #d84315; 
-          text-align: center;
-          padding: 16px 0; 
-          margin-bottom: 24px;
-          border-bottom: 1px solid #1b1f2a;
-          font-family: Georgia, "Times New Roman", Times, serif;
+          font-size: 13px; 
+          color: #cbd3df; 
+          background: #121520; 
+          border: 1px solid #1b1f2a; 
+          border-radius: 8px; 
+          padding: 12px 14px; 
+          margin: 16px 0; 
         }
         .social { 
           display: flex; 
@@ -514,12 +389,6 @@ export default function Footer() {
       `}</style>
 
       <div className="wrap">
-        <div className="disclaimer">
-          TogetherWe offers AI-powered relationship coaching
-          <br />
-          <strong>not a substitute for Licensed therapy</strong>
-        </div>
-
         <div className="grid">
           <div>
             <h4>Company</h4>
@@ -540,6 +409,12 @@ export default function Footer() {
                 <a href="/contact">Contact</a>
               </li>
             </ul>
+
+            <div className="disclaimer">
+              ⚠️ TogetherWe offers AI-powered relationship coaching
+              <br />
+              <strong>not a substitute for Licensed therapy</strong>
+            </div>
 
             <div className="social">
               <a href="#" aria-label="Facebook">

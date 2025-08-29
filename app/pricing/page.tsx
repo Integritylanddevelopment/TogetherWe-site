@@ -9,39 +9,13 @@ import Navigation from "../../components/navigation"
 export default function PricingPage() {
   const [betaEmail, setBetaEmail] = useState("")
   const [betaSignupSuccess, setBetaSignupSuccess] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
 
   const handleBetaSignup = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setErrorMessage("")
-
-    try {
-      const response = await fetch('/api/beta-signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: betaEmail,
-          source: 'pricing'
-        })
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setBetaSignupSuccess(true)
-        setBetaEmail("")
-      } else {
-        setErrorMessage(data.error || "Something went wrong. Please try again.")
-      }
-    } catch (error) {
-      setErrorMessage("Network error. Please check your connection and try again.")
-    } finally {
-      setIsSubmitting(false)
-    }
+    // TODO: Connect to Supabase database
+    console.log("[v0] Beta signup email:", betaEmail)
+    setBetaSignupSuccess(true)
+    setBetaEmail("")
   }
 
   return (
@@ -74,36 +48,19 @@ export default function PricingPage() {
             </p>
 
             {!betaSignupSuccess ? (
-              <>
-                <form onSubmit={handleBetaSignup} className="beta-form">
-                  <input
-                    type="email"
-                    value={betaEmail}
-                    onChange={(e) => setBetaEmail(e.target.value)}
-                    placeholder="Enter your email for beta access"
-                    required
-                    disabled={isSubmitting}
-                    className="beta-input"
-                  />
-                  <button type="submit" disabled={isSubmitting || !betaEmail} className="beta-btn">
-                    {isSubmitting ? "Joining..." : "Join Beta Testing Group"}
-                  </button>
-                </form>
-                
-                {errorMessage && (
-                  <div className="beta-error" style={{
-                    color: '#ff4444',
-                    textAlign: 'center',
-                    marginTop: '1rem',
-                    padding: '0.5rem',
-                    backgroundColor: '#ffe6e6',
-                    border: '1px solid #ff4444',
-                    borderRadius: '8px'
-                  }}>
-                    {errorMessage}
-                  </div>
-                )}
-              </>
+              <form onSubmit={handleBetaSignup} className="beta-form">
+                <input
+                  type="email"
+                  value={betaEmail}
+                  onChange={(e) => setBetaEmail(e.target.value)}
+                  placeholder="Enter your email for beta access"
+                  required
+                  className="beta-input"
+                />
+                <button type="submit" className="beta-btn">
+                  Join Beta Testing Group
+                </button>
+              </form>
             ) : (
               <div className="beta-success">
                 <div className="success-icon">✓</div>
