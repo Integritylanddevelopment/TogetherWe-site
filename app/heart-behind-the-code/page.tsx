@@ -1,40 +1,30 @@
 "use client"
+import Link from "next/link";
+import Navigation from "../../components/navigation";
 
-import Link from "next/link"
-
-export default function AIExplanationPage() {
+export default function HeartBehindTheCodePage() {
   return (
     <div>
-      {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="text-2xl font-bold gradient-text">
-              TogetherWe
-            </Link>
-            <div className="flex space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Home
-              </Link>
-              <Link href="/pricing" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Pricing
-              </Link>
-              <Link href="/emotional-roadmap" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Roadmap
-              </Link>
-              <Link href="/context-injection" className="text-gray-600 hover:text-purple-600 transition-colors">
-                How It Works
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <div className="floating-shapes"></div>
+
+      <Navigation />
+
+      <div className="hero">
+        <h1>The Heart Behind the Code</h1>
+        <div className="tagline">Bridging Hearts and Minds Through Technology</div>
+      </div>
+
+      <div className="heart-divider">
+        <div className="connection-line"></div>
+        <div className="heart"></div>
+        <div className="connection-line"></div>
+      </div>
 
       <div className="container">
-        <header className="header">
-          <h1 className="title">AI Engines</h1>
-          <p className="subtitle">Bridging Hearts and Minds Through Technology</p>
-        </header>
+        <div className="quote-section">
+          <div className="quote-text">"Where AI Meets the Human Heart"</div>
+          <div className="quote-author">Understanding the soul behind the technology</div>
+        </div>
 
         <section className="section">
           <h2 className="section-title">The Human Touch in Digital Minds</h2>
@@ -44,7 +34,7 @@ export default function AIExplanationPage() {
             moment of understanding represents thousands of hours of human care, empathy, and wisdom woven into digital
             form.
           </p>
-
+          
           <div className="heart-container">
             <div className="connection-line"></div>
             <div className="heart"></div>
@@ -137,57 +127,237 @@ export default function AIExplanationPage() {
 
         body {
           font-family: 'Georgia', serif;
-          background: linear-gradient(45deg, #fff8e7, #ffe4b5, #ffb347);
+          background: linear-gradient(135deg, #fff8e7 0%, #ffe4b5 50%, #ffb347 100%);
+          min-height: 100vh;
           color: #5d4037;
           line-height: 1.7;
-          min-height: 100vh;
         }
 
-        .gradient-text {
-          background: linear-gradient(135deg, #9333ea, #ec4899, #3b82f6);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+        .floating-shapes {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 1;
+          overflow: hidden;
+        }
+
+        .floating-shapes::before,
+        .floating-shapes::after {
+          content: '';
+          position: absolute;
+          border-radius: 50%;
+          opacity: 0.1;
+          animation: float 20s infinite ease-in-out;
+        }
+
+        .floating-shapes::before {
+          width: 300px;
+          height: 300px;
+          background: radial-gradient(circle, #ff7043, #ffab91);
+          top: 20%;
+          left: -100px;
+          animation-delay: -10s;
+        }
+
+        .floating-shapes::after {
+          width: 200px;
+          height: 200px;
+          background: radial-gradient(circle, #ffab91, #ff7043);
+          bottom: 10%;
+          right: -50px;
+          animation-delay: -5s;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33% { transform: translateY(-30px) rotate(120deg); }
+          66% { transform: translateY(20px) rotate(240deg); }
+        }
+
+        .nav-btn {
+          color: #d84315;
+          font-family: 'Georgia', serif;
+          font-size: 1.4rem;
+          font-weight: 300;
+          padding: 0.5rem 1.5rem;
+          margin: 0 0.5rem;
+          border-radius: 8px;
+          background: none;
+          transition: color 0.2s, background 0.2s;
+          text-decoration: none;
+          letter-spacing: 0.03em;
+          display: inline-block;
+          text-shadow: 2px 2px 4px rgba(216, 67, 21, 0.2);
+        }
+        .nav-btn:hover {
+          color: #fff;
+          background: #ff7043;
+        }
+        .nav-btn.active {
+          color: #ff7043;
+          background: #fff3e0;
+          border: 1px solid #ff7043;
+        }
+
+        .nav-btn {
+          color: #d84315;
+          font-family: 'Georgia', serif;
+          font-size: 1.4rem;
+          font-weight: 300;
+          padding: 0.5rem 1.5rem;
+          margin: 0 0.5rem;
+          border-radius: 8px;
+          background: none;
+          transition: color 0.2s, background 0.2s;
+          text-decoration: none;
+          letter-spacing: 0.03em;
+          display: inline-block;
+          text-shadow: 2px 2px 4px rgba(216, 67, 21, 0.2);
+        }
+        .nav-btn:hover {
+          color: #fff;
+          background: #ff7043;
+        }
+        .nav-btn.active {
+          color: #ff7043;
+          background: #fff3e0;
+          border: 1px solid #ff7043;
+        }
+
+        .hero {
+          text-align: center;
+          padding: 6rem 2rem 4rem;
+          position: relative;
+          z-index: 2;
+          background: rgba(255, 248, 231, 0.8);
+          backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+          font-size: 4rem;
+          font-weight: 300;
+          color: #d84315;
+          text-shadow: 3px 3px 6px rgba(216, 67, 21, 0.3);
+          margin-bottom: 1rem;
+          animation: fadeInUp 1s ease-out;
+        }
+
+        .tagline {
+          font-size: 1.8rem;
+          color: #8d6e63;
+          margin-bottom: 2rem;
+          font-weight: 300;
+          animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .heart-divider {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 4rem 0;
+          position: relative;
+          z-index: 2;
+        }
+
+        .connection-line {
+          height: 4px;
+          background: linear-gradient(90deg, #ff7043, #ffab91, #ff7043);
+          border-radius: 2px;
+          flex: 1;
+          max-width: 200px;
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        .heart {
+          width: 60px;
+          height: 60px;
+          background: #ff5722;
+          position: relative;
+          transform: rotate(-45deg);
+          animation: heartbeat 1.5s ease-in-out infinite;
+          margin: 0 20px;
+        }
+
+        .heart::before,
+        .heart::after {
+          content: '';
+          width: 60px;
+          height: 60px;
+          position: absolute;
+          background: #ff5722;
+          border-radius: 50%;
+        }
+
+        .heart::before {
+          top: -30px;
+          left: 0;
+        }
+
+        .heart::after {
+          left: 30px;
+          top: 0;
+        }
+
+        @keyframes heartbeat {
+          0%, 100% { transform: rotate(-45deg) scale(1); }
+          50% { transform: rotate(-45deg) scale(1.1); }
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 0.6; }
+          50% { opacity: 1; }
         }
 
         .container {
-          max-width: 900px;
+          max-width: 1200px;
           margin: 0 auto;
-          padding: 40px 20px;
+          padding: 0 2rem;
+          position: relative;
+          z-index: 2;
         }
 
-        .header {
+        .quote-section {
           text-align: center;
-          margin-bottom: 60px;
-          animation: fadeIn 2s ease-in-out;
+          margin: 4rem 0;
+          background: rgba(255, 255, 255, 0.7);
+          padding: 3rem;
+          border-radius: 20px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .title {
-          font-size: 3.5em;
+        .quote-text {
+          font-size: 2.2rem;
           color: #d84315;
-          margin-bottom: 20px;
+          font-style: italic;
+          margin-bottom: 1rem;
           font-weight: 300;
-          text-shadow: 2px 2px 4px rgba(216, 67, 21, 0.2);
         }
 
-        .subtitle {
-          font-size: 1.4em;
+        .quote-author {
+          font-size: 1.2rem;
           color: #8d6e63;
-          font-style: italic;
-          letter-spacing: 1px;
-          text-align: center;
+          font-weight: 300;
         }
 
         .section {
           background: rgba(255, 255, 255, 0.8);
           border-radius: 20px;
-          padding: 40px;
-          margin-bottom: 30px;
+          padding: 3rem;
+          margin-bottom: 2rem;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
           transition: all 0.3s ease;
           border-left: 6px solid #ff7043;
@@ -199,8 +369,8 @@ export default function AIExplanationPage() {
         }
 
         .section-title {
-          font-size: 2.2em;
-          margin-bottom: 25px;
+          font-size: 2.2rem;
+          margin-bottom: 1.5rem;
           color: #d84315;
           font-weight: 400;
           position: relative;
@@ -218,85 +388,10 @@ export default function AIExplanationPage() {
         }
 
         p {
-          font-size: 1.1em;
-          margin-bottom: 20px;
+          font-size: 1.2rem;
+          margin-bottom: 1.5rem;
           text-align: justify;
-        }
-
-        .heart-container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin: 40px 0;
-        }
-
-        .heart {
-          width: 80px;
-          height: 80px;
-          background: #ff5722;
-          position: relative;
-          transform: rotate(-45deg);
-          animation: heartbeat 1.5s ease-in-out infinite;
-          margin: 0 20px;
-        }
-
-        .heart::before,
-        .heart::after {
-          content: '';
-          width: 80px;
-          height: 80px;
-          position: absolute;
-          background: #ff5722;
-          border-radius: 50%;
-        }
-
-        .heart::before {
-          top: -40px;
-          left: 0;
-        }
-
-        .heart::after {
-          left: 40px;
-          top: 0;
-        }
-
-        @keyframes heartbeat {
-          0%, 100% { transform: rotate(-45deg) scale(1); }
-          50% { transform: rotate(-45deg) scale(1.1); }
-        }
-
-        .connection-line {
-          height: 4px;
-          background: linear-gradient(90deg, #ff7043, #ffab91, #ff7043);
-          border-radius: 2px;
-          flex: 1;
-          animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-          0%, 100% { opacity: 0.6; }
-          50% { opacity: 1; }
-        }
-
-        .quote {
-          background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-          border-left: 5px solid #ff9800;
-          padding: 25px;
-          margin: 30px 0;
-          border-radius: 0 15px 15px 0;
-          font-style: italic;
-          font-size: 1.2em;
-          position: relative;
-        }
-
-        .quote::before {
-          content: '"';
-          font-size: 4em;
-          color: #ff9800;
-          position: absolute;
-          top: -10px;
-          left: 15px;
-          opacity: 0.3;
+          line-height: 1.8;
         }
 
         .highlight {
@@ -309,6 +404,13 @@ export default function AIExplanationPage() {
           font-weight: 500;
         }
 
+        .heart-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 3rem 0;
+        }
+
         .story-card {
           background: rgba(255, 183, 77, 0.2);
           border-radius: 15px;
@@ -316,35 +418,6 @@ export default function AIExplanationPage() {
           margin: 25px 0;
           border: 2px solid #ffb74d;
           position: relative;
-        }
-
-        .impact-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 20px;
-          margin: 40px 0;
-        }
-
-        .impact-item {
-          text-align: center;
-          padding: 20px;
-          background: rgba(255, 255, 255, 0.6);
-          border-radius: 15px;
-          transition: all 0.3s ease;
-        }
-
-        .impact-item:hover {
-          background: rgba(255, 255, 255, 0.9);
-          transform: scale(1.05);
-        }
-
-        .impact-icon {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-bottom: 15px;
-          height: 64px;
-          font-size: 3em;
         }
 
         .footer {
@@ -363,30 +436,36 @@ export default function AIExplanationPage() {
         }
 
         @media (max-width: 768px) {
-          .container {
-            padding: 20px 15px;
+          .hero h1 {
+            font-size: 3rem;
           }
           
-          .title {
-            font-size: 2.5em;
+          .tagline {
+            font-size: 1.4rem;
           }
           
-          .subtitle {
-            font-size: 1.2em;
+          .nav-btn {
+            font-size: 1rem;
+            padding: 0.4rem 1rem;
+            margin: 0 0.25rem;
           }
           
           .section {
-            padding: 25px 20px;
-            margin-bottom: 25px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
           }
           
           .section-title {
-            font-size: 1.8em;
+            font-size: 1.8rem;
           }
           
-          .heart-container {
+          p {
+            font-size: 1.1rem;
+          }
+          
+          .heart-divider {
             flex-direction: column;
-            margin: 30px 0;
+            margin: 2rem 0;
           }
           
           .connection-line {
@@ -395,56 +474,8 @@ export default function AIExplanationPage() {
             margin: 15px 0;
             background: linear-gradient(180deg, #ff7043, #ffab91, #ff7043);
           }
-          
-          .heart {
-            width: 60px;
-            height: 60px;
-            margin: 0;
-          }
-          
-          .heart::before,
-          .heart::after {
-            width: 60px;
-            height: 60px;
-          }
-          
-          .heart::before {
-            top: -30px;
-          }
-          
-          .heart::after {
-            left: 30px;
-          }
-          
-          .impact-grid {
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin: 30px 0;
-          }
-          
-          .impact-item {
-            padding: 15px;
-          }
-          
-          .impact-icon {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-          }
-          
-          p {
-            font-size: 1em;
-          }
-          
-          .footer {
-            margin-top: 40px;
-            padding: 25px 20px;
-          }
-          
-          .footer p {
-            font-size: 1.1em;
-          }
         }
       `}</style>
     </div>
-  )
+  );
 }

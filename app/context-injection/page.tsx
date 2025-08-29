@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import Navigation from "../../components/navigation"
 
 export default function ContextInjectionPage() {
   const [activeTab, setActiveTab] = useState("overview")
@@ -36,34 +37,11 @@ export default function ContextInjectionPage() {
 
   return (
     <div>
-      {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="text-2xl font-bold gradient-text">
-              TogetherWe
-            </Link>
-            <div className="flex space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Home
-              </Link>
-              <Link href="/pricing" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Pricing
-              </Link>
-              <Link href="/ai-explanation" className="text-gray-600 hover:text-purple-600 transition-colors">
-                AI Technology
-              </Link>
-              <Link href="/emotional-roadmap" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Roadmap
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       <div className="presentation-container">
         <div className="header">
-          <h1>TogetherWe Context Injection Engine</h1>
+          <h1>TogetherWe<br />Context Injection Engine</h1>
           <p>
             How 20 Emotional Intelligence Engines work together with the Context Injection Engine to deliver
             personalized, precise coaching insights tailored specifically to each couple
@@ -71,7 +49,7 @@ export default function ContextInjectionPage() {
         </div>
 
         <div className="tab-container">
-          <div className="tab-list">
+          <div className="tab-list" style={{ justifyContent: 'center', display: 'flex', flexWrap: 'wrap' }}>
             <button
               className={`tab-button ${activeTab === "overview" ? "active" : ""}`}
               onClick={() => setActiveTab("overview")}
@@ -126,19 +104,19 @@ export default function ContextInjectionPage() {
                     <div className="accordion-content">
                       <div className="engines-grid">
                         <div className="engine-card">
-                          <h3>🎯 Pattern Review Orchestrator</h3>
+                          <h3>Pattern Review Orchestrator</h3>
                           <p>Coordinates all 20 engines, manages parallel processing, and synthesizes insights</p>
                         </div>
                         <div className="engine-card">
-                          <h3>🧠 20 Emotional Intelligence Engines</h3>
+                          <h3>20 Emotional Intelligence Engines</h3>
                           <p>Specialized AI coaches, each expert in specific relationship domains</p>
                         </div>
                         <div className="engine-card">
-                          <h3>⚡ Context Injection Engine</h3>
+                          <h3>Context Injection Engine</h3>
                           <p>Crafts personalized prompts and queries the AI with tailored context</p>
                         </div>
                         <div className="engine-card">
-                          <h3>🔄 CommandCore Memory System</h3>
+                          <h3>CommandCore Memory System</h3>
                           <p>Maintains relationship history, patterns, and coaching progress</p>
                         </div>
                       </div>
@@ -156,7 +134,7 @@ export default function ContextInjectionPage() {
                       <ul style={{ paddingLeft: "1.5rem", lineHeight: 1.8 }}>
                         <li>
                           <strong>Comprehensive Review:</strong> Every major relationship domain is broken down by
-                          specialized experts
+                          specialized Algorithms
                         </li>
                         <li>
                           <strong>Personalized Context:</strong> Each AI query includes your specific patterns, history,
@@ -192,8 +170,8 @@ export default function ContextInjectionPage() {
                 {engines.map((engine) => (
                   <div key={engine.id} className="engine-card">
                     <h3>
-                      <span className="engine-number">{engine.id}</span>
-                      {engine.name}
+                      <span className="engine-number" style={{ minWidth: '2rem', display: 'inline-block' }}>{engine.id}</span>
+                      <span style={{ wordBreak: 'break-word' }}>{engine.name}</span>
                     </h3>
                     <p>{engine.focus}</p>
                   </div>
@@ -213,8 +191,8 @@ export default function ContextInjectionPage() {
               <h2>Context Injection Engine: The Personalization Core</h2>
 
               <div className="highlight">
-                The Context Injection Engine transforms generic AI into your personal coaching companion by crafting
-                highly specific, contextually rich prompts based on your unique relationship data.
+                Context Injection Engine transforms generic AI into your personal coaching companion by crafting
+                highly specific, contextually rich questions to the AI based on your unique relationship data. So every AI response is tailored specifically to you.
               </div>
 
               <div className="accordion">
@@ -286,7 +264,7 @@ export default function ContextInjectionPage() {
                       <p style={{ marginBottom: "1rem" }}>
                         The Context Injection Engine creates a personalized prompt like:
                       </p>
-                      <div className="code-block">
+                      <div className="highlight" style={{ backgroundColor: 'rgba(255, 243, 224, 0.5)', border: '1px solid #ff7043', borderRadius: '8px', padding: '1.5rem', fontStyle: 'italic' }}>
                         "You are coaching Sarah (anxious attachment, tends to pursue) and Mike (avoidant attachment,
                         withdraws during conflict). Sarah's pattern: Becomes overwhelmed, seeks reassurance, fears
                         abandonment when Mike goes quiet. Mike's pattern: Shuts down when emotions get intense, needs
@@ -465,40 +443,40 @@ export default function ContextInjectionPage() {
                     <div className="accordion-content">
                       <div className="engines-grid">
                         <div className="engine-card">
-                          <h3>🎭 Attachment Styles</h3>
+                          <h3>Attachment Styles</h3>
                           <p>
                             Your specific attachment patterns (anxious, avoidant, secure, disorganized) guide all
                             coaching recommendations
                           </p>
                         </div>
                         <div className="engine-card">
-                          <h3>💬 Communication Patterns</h3>
+                          <h3>Communication Patterns</h3>
                           <p>
                             Your unique ways of expressing and receiving love, handling conflict, and processing
                             emotions
                           </p>
                         </div>
                         <div className="engine-card">
-                          <h3>🚨 Triggers & Strengths</h3>
+                          <h3>Triggers & Strengths</h3>
                           <p>
                             What specifically triggers each partner and what your relationship's unique strengths are
                           </p>
                         </div>
                         <div className="engine-card">
-                          <h3>📚 Coaching History</h3>
+                          <h3>Coaching History</h3>
                           <p>
                             Previous conversations, progress made, and what approaches work best for your relationship
                           </p>
                         </div>
                         <div className="engine-card">
-                          <h3>🎯 Current Context</h3>
+                          <h3>Current Context</h3>
                           <p>
                             What's happening in your life right now - stress, life changes, recent conflicts or
                             successes
                           </p>
                         </div>
                         <div className="engine-card">
-                          <h3>🗣️ Language Preferences</h3>
+                          <h3>Language Preferences</h3>
                           <p>
                             How you prefer to receive feedback, your communication style, and cultural considerations
                           </p>

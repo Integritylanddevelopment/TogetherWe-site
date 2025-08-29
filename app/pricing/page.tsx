@@ -4,6 +4,7 @@ import type React from "react"
 
 import Link from "next/link"
 import { useState } from "react"
+import Navigation from "../../components/navigation"
 
 export default function PricingPage() {
   const [betaEmail, setBetaEmail] = useState("")
@@ -19,30 +20,7 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link href="/" className="text-2xl font-bold" style={{ color: "#d84315" }}>
-              TogetherWe
-            </Link>
-            <div className="flex space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-orange-600 transition-colors">
-                Home
-              </Link>
-              <Link href="/ai-explanation" className="text-gray-600 hover:text-orange-600 transition-colors">
-                AI Technology
-              </Link>
-              <Link href="/emotional-roadmap" className="text-gray-600 hover:text-orange-600 transition-colors">
-                Roadmap
-              </Link>
-              <Link href="/context-injection" className="text-gray-600 hover:text-orange-600 transition-colors">
-                How It Works
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       <div className="hero">
         <h1>Choose Your Relationship Journey</h1>
@@ -153,9 +131,6 @@ export default function PricingPage() {
       </div>
 
       <div className="footer">
-        <div className="disclaimer-footer">
-          TogetherWe offers AI-powered relationship coaching, not a substitute for Licensed therapy
-        </div>
         <div className="footer-content">
           <h3>Ready to Transform Your Relationship?</h3>
           <p>Join the revolution in couples coaching with AI that understands, adapts, and empowers lasting love.</p>
@@ -389,7 +364,7 @@ export default function PricingPage() {
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(255, 255, 255, 0.95);
+          background: rgba(255, 255, 255, 0.85);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -451,19 +426,6 @@ export default function PricingPage() {
           background: rgba(255, 255, 255, 0.9);
           padding: 3rem 0 2rem;
           text-align: center;
-        }
-
-        .disclaimer-footer {
-          background: #fff3e0;
-          border: 2px solid #ff7043;
-          border-radius: 12px;
-          padding: 1rem 2rem;
-          color: #d84315;
-          font-size: 1.1rem;
-          font-weight: 500;
-          max-width: 800px;
-          margin: 0 auto 2rem;
-          box-shadow: 0 4px 16px rgba(255,112,67,0.08);
         }
 
         .footer-content h3 {

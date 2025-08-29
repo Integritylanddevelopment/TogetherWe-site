@@ -99,10 +99,12 @@ export default function HomePage() {
       </div>
 
       <div className="footer">
-        <h3>Ready to Transform Relationships?</h3>
+        <h3>Ready to Transform Your Relationship?</h3>
         <p>Join the revolution in couples coaching with AI that understands, adapts, and empowers lasting love.</p>
-        <Link href="/pricing" className="cta-button">
-          Discover Our Plans
+        <Link href="/relationship-roadmap" passHref legacyBehavior>
+          <button className="beta-btn" aria-label="See the Relationship Roadmap" style={{display: 'inline-block', textAlign: 'center', marginTop: '1rem'}}>
+            See the Relationship Roadmap
+          </button>
         </Link>
       </div>
 
