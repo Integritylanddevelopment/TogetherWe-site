@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TogetherWe - AI-Powered Couples Coaching & Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #fff8e7 0%, #ffe4b5 50%, #ffb347 100%);
+            min-height: 100vh;
+            color: #5d4037;
+            line-height: 1.7;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-shapes::before,
+        .floating-shapes::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .floating-shapes::before {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #ff7043, #ffab91);
+            top: 20%;
+            left: -100px;
+            animation-delay: -10s;
+        }
+
+        .floating-shapes::after {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #ff9800, #ffe0b2);
+            bottom: 30%;
+            right: -50px;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .hero {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 100px 20px 80px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: #d84315;
+            text-shadow: 2px 2px 4px rgba(216, 67, 21, 0.2);
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .hero .tagline {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #8d6e63;
+            font-style: italic;
+            letter-spacing: 1px;
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+            color: #6d4c41;
+            animation: fadeInUp 1.5s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart-divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 60px 0 80px;
+            animation: fadeInUp 1.5s ease-out 0.9s both;
+        }
+
+        .heart {
+            width: 60px;
+            height: 60px;
+            background: #ff7043;
+            position: relative;
+            transform: rotate(-45deg);
+            animation: heartbeat 2s ease-in-out infinite;
+            margin: 0 20px;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            background: #ff7043;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -30px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 30px;
+            top: 0;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.1); }
+        }
+
+        .connection-line {
+            height: 3px;
+            background: linear-gradient(90deg, #ff7043, #ffab91, #ff7043);
+            border-radius: 2px;
+            flex: 1;
+            max-width: 150px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 50px;
+            margin: 0 0 100px;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 50px 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 6px solid transparent;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            border-radius: 25px 25px 0 0;
+        }
+
+        .category-card.product {
+            border-left-color: #ff7043;
+        }
+
+        .category-card.product::before {
+            background: linear-gradient(135deg, #ff7043, #ffab91);
+        }
+
+        .category-card.business {
+            border-left-color: #ff9800;
+        }
+
+        .category-card.business::before {
+            background: linear-gradient(135deg, #ff9800, #ffcc80);
+        }
+
+        .category-card.technology {
+            border-left-color: #f57c00;
+        }
+
+        .category-card.technology::before {
+            background: linear-gradient(135deg, #f57c00, #ffb74d);
+        }
+
+        .category-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .category-icon {
+            font-size: 3.5rem;
+            margin-right: 25px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .category-title {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #d84315;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff7043, #ffab91);
+            border-radius: 2px;
+        }
+
+        .category-description {
+            font-size: 1.15rem;
+            color: #6d4c41;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .page-links {
+            display: grid;
+            gap: 18px;
+        }
+
+        .page-link {
+            display: block;
+            padding: 20px 25px;
+            background: rgba(255, 248, 231, 0.8);
+            border: 2px solid #ffe0b2;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #5d4037;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 112, 67, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .page-link:hover::before {
+            left: 100%;
+        }
+
+        .page-link:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .product .page-link:hover {
+            border-color: #ff7043;
+            color: #d84315;
+        }
+
+        .business .page-link:hover {
+            border-color: #ff9800;
+            color: #d84315;
+        }
+
+        .technology .page-link:hover {
+            border-color: #f57c00;
+            color: #d84315;
+        }
+
+        .page-link::after {
+            content: '→';
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .page-link:hover::after {
+            opacity: 1;
+            right: 20px;
+        }
+
+        .footer {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            margin-top: 50px;
+            border-top: 4px solid #ff7043;
+        }
+
+        .footer h3 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            font-weight: 400;
+            color: #d84315;
+        }
+
+        .footer p {
+            font-size: 1.2rem;
+            color: #6d4c41;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #ff7043, #ff9800);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 112, 67, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 112, 67, 0.4);
+        }
+
+        .quote-section {
+            text-align: center;
+            margin: 80px 0;
+            padding: 50px 30px;
+            background: rgba(255, 248, 231, 0.6);
+            border-radius: 25px;
+            border-left: 5px solid #ff9800;
+            position: relative;
+        }
+
+        .quote-section::before {
+            content: '"';
+            font-size: 6em;
+            color: #ff9800;
+            position: absolute;
+            top: -20px;
+            left: 40px;
+            opacity: 0.2;
+        }
+
+        .quote-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #5d4037;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            color: #8d6e63;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.3rem;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .category-card {
+                padding: 40px 30px;
+            }
+
+            .category-header {
+                flex-direction: column;
+                text-align: center;
+                margin-bottom: 25px;
+            }
+
+            .category-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .floating-shapes::before {
+                width: 200px;
+                height: 200px;
+            }
+
+            .floating-shapes::after {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        /* ===== Beta CTA Card (overrides + enhancements) ===== */
+        .category-card.beta-cta {
+          text-align: center;
+          border-left-color: #ff7043; /* ensure orange accent */
+          background: rgba(255, 255, 255, 0.9);
+        }
+        .beta-cta .category-header {
+          justify-content: center;
+          gap: 18px;
+        }
+        .beta-cta .beta-title-row {
+          display: inline-flex;
+          align-items: center;
+          gap: 16px;
+        }
+        .heart.small {
+          position: relative;
+          width: 36px;
+          height: 36px;
+          background: #ff7043;
+          transform: rotate(-45deg);
+          animation: heartbeat 2s ease-in-out infinite;
+          filter: drop-shadow(0 2px 6px rgba(255,112,67,0.35));
+        }
+        .heart.small::before,
+        .heart.small::after {
+          content: '';
+          width: 36px;
+          height: 36px;
+          position: absolute;
+          background: #ff7043;
+          border-radius: 50%;
+        }
+        .heart.small::before { top: -18px; left: 0; }
+        .heart.small::after  { top: 0; left: 18px; }
+
+        .beta-cta .category-title {
+          font-size: 2.1rem;
+          font-weight: 400;
+          color: #d84315;
+          position: relative;
+          line-height: 1.2;
+        }
+        .beta-cta .category-title::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 70px;
+          height: 3px;
+          background: linear-gradient(90deg, #ff7043, #ffab91);
+          border-radius: 2px;
+        }
+
+        .beta-cta .category-description {
+          font-size: 1.15rem;
+          color: #6d4c41;
+          margin: 28px auto 24px;
+          line-height: 1.6;
+          text-align: center;
+          max-width: 680px;
+        }
+
+        .beta-form {
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+          margin: 4px auto 10px;
+          max-width: 640px;
+        }
+        .beta-input {
+          flex: 1 1 320px;
+          min-width: 260px;
+          padding: 14px 16px;
+          border: 2px solid #ffe0b2;
+          border-radius: 12px;
+          background: rgba(255, 248, 231, 0.8);
+          color: #5d4037;
+          font-size: 1rem;
+          outline: none;
+          transition: all .25s ease;
+        }
+        .beta-input::placeholder { color: #8d6e63; }
+        .beta-input:focus {
+          background: rgba(255,255,255,0.95);
+          border-color: #ffab91;
+          box-shadow: 0 6px 20px rgba(255,112,67,0.12);
+        }
+
+        .beta-btn {
+          padding: 14px 22px;
+          border: 0;
+          border-radius: 14px;
+          background: linear-gradient(135deg, #ff7043, #ff9800);
+          color: #fff;
+          font-weight: 600;
+          font-size: 1.05rem;
+          cursor: pointer;
+          transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+          box-shadow: 0 10px 30px rgba(255, 112, 67, 0.3);
+        }
+        .beta-btn:hover {
+          transform: translateY(-2px) scale(1.03);
+          box-shadow: 0 14px 36px rgba(255,112,67,0.36);
+          filter: saturate(1.05);
+        }
+
+        .beta-success {
+          display: none;
+          margin: 10px auto 0;
+          padding: 12px 14px;
+          max-width: 520px;
+          border: 2px solid #ffab91;
+          background: rgba(255, 248, 231, 0.9);
+          border-radius: 12px;
+          color: #6d4c41;
+          font-weight: 600;
+        }
+        .beta-supporting {
+          margin-top: 14px;
+          color: #8d6e63;
+          font-size: 1.02rem;
+          font-style: italic;
+        }
+
+        @media (max-width: 520px) {
+          .beta-cta .category-title { font-size: 1.8rem; }
+          .heart.small { width: 30px; height: 30px; }
+          .heart.small::before, .heart.small::after { width: 30px; height: 30px; }
+          .heart.small::after { left: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes"></div>
+    
+    <div class="hero">
+        <h1>TogetherWe</h1>
+        <div class="tagline">AI-Powered Couples Coaching & Support</div>
+        <div class="subtitle">
+            Revolutionary relationship support that adapts to your unique dynamics, providing personalized insights and coaching guidance<br>
+            to strengthen your connection.
+        </div>
+        <div class="disclaimer-box" style="margin: 30px auto 0; max-width: 700px; background: #fff3e0; border: 2px solid #ff7043; border-radius: 12px; padding: 22px; color: #d84315; font-size: 1.1rem; font-weight: 500; box-shadow: 0 4px 16px rgba(255,112,67,0.08); animation: fadeInUp 1.5s ease-out 0.9s both;">
+            TogetherWe offers AI-powered relationship coaching<br>
+            <span style="display:block; margin-top:8px;">not a substitute for Licensed therapy</span>
+        </div>
+    </div>
+
+    <div class="heart-divider">
+        <div class="connection-line"></div>
+        <div class="heart"></div>
+        <div class="connection-line"></div>
+    </div>
+
+    <div class="container">
+        <div class="quote-section">
+            <div class="quote-text">
+                "Where Technology Meets the Human Soul"
+            </div>
+            <div class="quote-author">
+                Experience the future of relationship healing
+            </div>
+        </div>
+
+        <div class="categories">
+          <!-- ===== Beta Group CTA Card (fixed + polished) ===== -->
+          <div class="category-card product beta-cta" id="beta-cta-card">
+            <div class="category-header">
+              <div class="beta-title-row">
+                <div class="heart small" aria-hidden="true"></div>
+                <div class="category-title">Fall Back in Love<br>Every Day</div>
+                <div class="heart small" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <div class="category-description beta-desc">
+              <p>Most couples drift apart over time. You don’t have to.</p>
+              <p>TogetherWe helps you break routine, spark deeper conversations, and bring back that <em>can’t-wait-to-see-you</em> feeling.</p>
+            </div>
+
+            <form id="beta-signup-form" class="beta-form" aria-label="Beta signup form">
+              <input
+                type="email"
+                name="email"
+                placeholder="Your email address"
+                required
+                class="beta-input"
+                aria-label="Email address"
+                autocomplete="email"
+                inputmode="email"
+              />
+              <button type="submit" class="beta-btn" aria-label="Claim your early access">
+                Claim Your Early Access Now
+              </button>
+            </form>
+
+            <div id="beta-signup-success" class="beta-success" role="status" aria-live="polite">
+              Thank you! You’re on the list. We’ll be in touch soon.
+            </div>
+
+            <div class="supporting-line beta-supporting">
+              Now Beta Testing: Only 500 couples will get in. Claim your spot before they’re gone.
+            </div>
+          </div>
+          <!-- ===== /Beta Group CTA Card ===== -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <h3>Ready to Transform Relationships?</h3>
+        <p>
+            Join the revolution in couples coaching with AI that understands, adapts, and empowers lasting love.
+        </p>
+        <a href="togetherewe_investor_pitch.html" class="cta-button">
+            Discover the Vision
+        </a>
+    </div>
+
+<!-- ===== TogetherWe Footer (dark, minimal, responsive) ===== -->
+<footer id="site-footer" role="contentinfo" aria-label="Website footer">
+  <style>
+    #site-footer { background:#0f1115; color:#e6e6e6; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; }
+    #site-footer a { color:#cfd6ff; text-decoration:none; }
+    #site-footer a:hover, #site-footer a:focus { text-decoration:underline; }
+    #site-footer .wrap { max-width:1200px; margin:0 auto; padding:32px 16px; }
+    #site-footer .grid { display:grid; grid-template-columns: 1.1fr .9fr .9fr; gap:24px; }
+    #site-footer h4 { margin:0 0 12px; font-size:14px; color:#9aa4b2; text-transform:uppercase; letter-spacing:.04em; }
+    #site-footer ul { list-style:none; padding:0; margin:0; }
+    #site-footer li { margin:8px 0; }
+    #site-footer .legal { border-top:1px solid #1b1f2a; margin-top:24px; padding-top:16px; font-size:13px; color:#b7bec9; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; }
+    #site-footer .legal .split { display:flex; gap:16px; flex-wrap:wrap; align-items:center; }
+    #site-footer address { font-style:normal; color:#cbd3df; }
+    #site-footer .disclaimer { font-size:13px; color:#cbd3df; background:#121520; border:1px solid #1b1f2a; border-radius:8px; padding:12px 14px; margin:16px 0; }
+    #site-footer .social { display:flex; gap:12px; }
+    #site-footer .social a { width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; background:#141824; border:1px solid #1b1f2a; border-radius:8px; }
+    #site-footer .social a:hover { background:#1a1f2f; }
+    #site-footer svg { width:18px; height:18px; fill:#cfd6ff; }
+    /* Cookie banner */
+    #cookie-banner { position:fixed; inset:auto 0 0 0; background:#0f1115; color:#e6e6e6; border-top:1px solid #1b1f2a; padding:12px 16px; display:none; z-index:9999; }
+    #cookie-banner .cb-wrap { max-width:1200px; margin:0 auto; display:flex; gap:12px; align-items:center; justify-content:space-between; }
+    #cookie-banner p { margin:0; font-size:14px; color:#cbd3df; }
+    #cookie-banner .cb-actions { display:flex; gap:10px; }
+    .btn-accept { background:#2b60ff; color:#fff; border:0; padding:8px 12px; border-radius:6px; cursor:pointer; font-size:14px; }
+    .btn-accept:hover { filter:brightness(1.05); }
+    .btn-link { background:transparent; border:0; padding:0; font-size:14px; color:#cfd6ff; text-decoration:underline; cursor:pointer; }
+    /* Responsive */
+    @media (max-width: 880px) {
+      #site-footer .grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      #site-footer .grid { grid-template-columns: 1fr; }
+      #site-footer .legal { flex-direction:column; align-items:flex-start; gap:8px; }
+    }
+  </style>
+
+  <div class="wrap" itemscope itemtype="https://schema.org/Organization">
+    <meta itemprop="name" content="TogetherWe">
+    <div class="grid" aria-label="Footer navigation">
+      <!-- Column: Company -->
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about" aria-label="About Us">About Us</a></li>
+          <li><a href="/faq" aria-label="Frequently Asked Questions">FAQ</a></li>
+          <li><a href="/investors" aria-label="Investors">Investors</a></li>
+          <li><a href="/accessibility" aria-label="Accessibility">Accessibility</a></li>
+          <li><a href="/contact" aria-label="Contact">Contact</a></li>
+        </ul>
+
+        <div class="disclaimer" role="note" aria-live="polite">
+          ⚠️ AI coaching, not therapy. For crisis call <strong>988</strong> or <strong>911</strong>.
+        </div>
+
+        <div class="social" aria-label="Social media">
+          <!-- Replace data-url values with your real profile URLs when ready -->
+          <a href="#" data-url="#" aria-label="Facebook" title="Facebook" rel="noopener">
+            <!-- Facebook icon -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.48 17.52 2 11.94 2S2 6.48 2 12.06c0 5 3.66 9.14 8.44 9.94v-7.03H7.9v-2.91h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.77l-.44 2.91h-2.33V22c4.78-.8 8.44-4.94 8.44-9.94z"/></svg>
+          </a>
+          <a href="#" data-url="#" aria-label="Instagram" title="Instagram" rel="noopener">
+            <!-- Instagram icon -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7zm7-1.2a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM12 9.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/></svg>
+          </a>
+          <a href="#" data-url="#" aria-label="TikTok" title="TikTok" rel="noopener">
+            <!-- TikTok icon -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 3h2.1c.3 2.2 1.6 3.6 3.9 3.9v2.1c-1.5.1-2.8-.4-4-1.2v6.5c0 3.2-2.2 5.7-5.4 6-3.6.3-6.6-2.8-6.2-6.4.3-3.1 2.9-5.2 6-5.2.6 0 1.2.1 1.6.2v2.3c-.5-.2-1-.3-1.6-.3-2 0-3.6 1.6-3.6 3.6s1.8 3.7 3.9 3.3c1.6-.3 2.5-1.6 2.5-3.2V3z"/></svg>
+          </a>
+          <a href="#" data-url="#" aria-label="Twitter" title="Twitter/X" rel="noopener">
+            <!-- X icon -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.98 3H20l-6.99 8.01L20.5 21h-3.54l-5.6-6.7-5.64 6.7H2.2l7.44-8.85L3.02 3h3.6l5.04 6.05L16.98 3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Column: Legal -->
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy" aria-label="Privacy Policy">Privacy Policy</a></li>
+          <li><a href="/terms" aria-label="Terms of Use">Terms of Use</a></li>
+          <li><a href="/disclaimer" aria-label="Disclaimer">Disclaimer</a></li>
+          <li><a href="/cookies" aria-label="Cookie Policy">Cookie Policy</a></li>
+          <li><a href="/privacy-choices" aria-label="Privacy Choices">Privacy Choices</a></li>
+        </ul>
+      </div>
+
+      <!-- Column: Contact -->
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:support@TogetherWe.app" itemprop="email">support@TogetherWe.app</a></li>
+          <li>
+            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span itemprop="streetAddress">3225 Mcleod Drive, Suite 100</span><br>
+              <span itemprop="addressLocality">Las Vegas</span>, <span itemprop="addressRegion">NV</span>
+              <span itemprop="postalCode">89121</span>
+            </address>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="legal" aria-label="Legal lines">
+      <div class="split">
+        <span id="copyright-line">© <span id="year"></span> TogetherWe Media Group LLC. All rights reserved.</span>
+      </div>
+      <div class="split">
+        <span>togetherwe.com is operated by Together We Media Group LLC.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie notice">
+    <div class="cb-wrap">
+      <p>We use cookies to operate and improve this site. See our <a href="/cookies">Cookie Policy</a>.</p>
+      <div class="cb-actions">
+        <button class="btn-accept" id="cookie-accept">Accept</button>
+        <a class="btn-link" href="/privacy">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Auto year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Social popup behavior (replace `data-url="#"` with real URLs to activate)
+    function openPopup(url, name) {
+      const w = 600, h = 700;
+      const y = window.top.outerHeight / 2 + window.top.screenY - (h / 2);
+      const x = window.top.outerWidth / 2 + window.top.screenX - (w / 2);
+      window.open(url, name || 'ext', `toolbar=0,location=0,status=0,menubar=0,scrollbars=1,resizable=1,width=${w},height=${h},top=${y},left=${x}`);
+    }
+    document.querySelectorAll('#site-footer .social a').forEach(a => {
+      a.addEventListener('click', e => {
+        const url = a.getAttribute('data-url');
+        if (url && url !== '#') {
+          e.preventDefault();
+          openPopup(url, 'social');
+        } else if (a.getAttribute('href') === '#') {
+          e.preventDefault(); // placeholder; no action
+        }
+      });
+      // Fallback to new tab if user Ctrl/Cmd-clicks
+      a.setAttribute('target','_blank');
+      a.setAttribute('rel','noopener');
+    });
+
+    // Cookie banner
+    const COOKIE_KEY = 'tw_cookie_consent_v1';
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    try {
+      if (!localStorage.getItem(COOKIE_KEY)) {
+        banner.style.display = 'block';
+      }
+      acceptBtn.addEventListener('click', () => {
+        localStorage.setItem(COOKIE_KEY, 'accepted');
+        banner.style.display = 'none';
+      });
+    } catch(e) {
+      // If storage blocked, still allow dismiss per session
+      acceptBtn.addEventListener('click', () => banner.style.display = 'none');
+      banner.style.display = 'block';
+    }
+
+    // ===== Beta form handler (single source of truth) =====
+    (function(){
+      const form = document.getElementById('beta-signup-form');
+      const success = document.getElementById('beta-signup-success');
+      if (!form) return;
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+
+        // TODO: integrate with your backend or Mailchimp
+        // Example:
+        // fetch('/api/beta', {
+        //   method:'POST',
+        //   headers:{'Content-Type':'application/json'},
+        //   body: JSON.stringify({ email: form.email.value })
+        // });
+
+        form.style.display = 'none';
+        success.style.display = 'block';
+      });
+    })();
+  </script>
+</footer>
+<!-- ===== /TogetherWe Footer ===== -->
+<!-- ===== TogetherWe Popups (Legal + Info) ===== -->
+<style>
+  .tw-modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,.6);
+    display:none; z-index: 10000;
+  }
+  .tw-modal {
+    position: fixed; inset: 5% 50% auto 50%;
+    transform: translateX(-50%); max-width: 860px; width: calc(100% - 24px);
+    background: #0f1115; color: #e6e6e6;
+    border: 1px solid #1b1f2a; border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5); display:none; z-index: 10001;
+  }
+  .tw-modal header {
+    padding: 14px 16px; border-bottom: 1px solid #1b1f2a; background:#121520;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .tw-modal h3 { margin:0; font-size: 18px; color:#cbd3df; }
+  .tw-modal .tw-close {
+    background: transparent; border:1px solid #2a3143; color:#cfd6ff;
+    border-radius:8px; padding:6px 10px; cursor:pointer; font-size:14px;
+  }
+  .tw-modal .tw-content {
+    max-height: 70vh; overflow:auto; padding: 16px;
+  }
+  .tw-modal .tw-content h4 { margin: 18px 0 8px; color:#cfd6ff; font-size:16px; }
+  .tw-modal .tw-content p, .tw-modal .tw-content li { line-height:1.6; color:#e6e6e6; }
+  .tw-modal .tw-content small { color:#9aa4b2; }
+  .tw-modal .muted { color:#b7bec9; }
+  .tw-modal a { color:#cfd6ff; }
+  .tw-modal .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#141824; padding:1px 6px; border-radius:6px; border:1px solid #1b1f2a; }
+  @media (max-width: 720px) {
+    .tw-modal { inset: 4% 12px auto 12px; transform:none; }
+  }
+</style>
+
+<div class="tw-modal-backdrop" id="tw-backdrop" aria-hidden="true"></div>
+
+<!-- Generic modal shell -->
+<div class="tw-modal" id="tw-modal" role="dialog" aria-modal="true" aria-labelledby="tw-modal-title">
+  <header>
+    <h3 id="tw-modal-title">Title</h3>
+    <button class="tw-close" id="tw-close" aria-label="Close dialog">Close</button>
+  </header>
+  <div class="tw-content" id="tw-modal-content">
+    <!-- content injected by JS -->
+  </div>
+</div>
+
+<script>
+  // Map footer slugs to modal content
+  const TW_PAGES = {
+    "/privacy": {
+      title: "Privacy Policy",
+      html: `
+<p><strong>Effective Date:</strong> [Insert Date]</p>
+<p>TogetherWe (“we,” “our,” “us”) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our AI-powered couples coaching and support platform.</p>
+
+<h4>1. Information We Collect</h4>
+<ul>
+  <li><strong>Personal Information You Provide:</strong> name, email, login, subscription/billing, optional profile details.</li>
+  <li><strong>Content You Input:</strong> text you type, AI responses, interaction data.</li>
+  <li><strong>Technical Data:</strong> device/browser, IP, logs, cookies or similar tech.</li>
+</ul>
+
+<h4>2. How We Use Information</h4>
+<ul>
+  <li>Provide, personalize, and improve the platform</li>
+  <li>Security, performance, payments, support, and admin notices</li>
+  <li>Generate anonymized insights to improve coaching models</li>
+</ul>
+
+<h4>3. Sharing & Disclosure</h4>
+<p>We <strong>do not sell</strong> your personal data. We may share with service providers (payments, hosting, analytics), for legal compliance, business transfers, or in an <strong>aggregated/de-identified</strong> form.</p>
+
+<h4>4. Security</h4>
+<p>Encryption in transit (TLS/HTTPS) and at rest where appropriate; access restricted to authorized staff. No system is 100% secure.</p>
+
+<h4>5. Retention & Deletion</h4>
+<p>We retain data as needed for services and legal obligations. Request deletion at <a href="mailto:privacy@togetherwelove.app">privacy@togetherwelove.app</a>.</p>
+
+<h4>6. Your Rights</h4>
+<p>Depending on jurisdiction: access, correction, deletion, portability, opt-out of marketing, restrict/object to processing. Contact us to exercise your rights.</p>
+
+<h4>7. Children</h4>
+<p>Not for users under 18. If we learn of under-18 data, we delete it.</p>
+
+<h4>8. International Use</h4>
+<p>Data may be processed in the U.S. or other locations where we and our providers operate.</p>
+
+<h4>9. Third-Party Links</h4>
+<p>We aren’t responsible for external sites’ practices.</p>
+
+<h4>10. Updates</h4>
+<p>We may update this Policy; continued use = acceptance.</p>
+
+<h4>11. Contact</h4>
+<p>Email: <a href="mailto:privacy@togetherwelove.app">privacy@togetherwelove.app</a></p>
+
+<p class="muted"><small>Summary: limited data to operate our coaching platform; no sale of personal data; industry-standard safeguards; rights honored per applicable laws.</small></p>
+      `
+    },
+    "/terms": {
+      title: "Terms of Use",
+      html: `
+<p><strong>Effective Date:</strong> [Insert Date]</p>
+<h4>1. Nature of Services</h4>
+<p>TogetherWe provides <strong>AI-powered couples coaching and support tools</strong>. Not therapy, counseling, medical advice, diagnosis, or treatment. No licensed professional is monitoring your use.</p>
+
+<h4>2. No Professional-Client Relationship</h4>
+<p>Use does not create a therapist-client, counselor-client, or doctor-patient relationship.</p>
+
+<h4>3. Not for Emergencies</h4>
+<p>Do not use for crisis needs. Call <strong>911</strong> or in the U.S. dial/text <strong>988</strong> for the Suicide & Crisis Lifeline.</p>
+
+<h4>4. User Responsibilities</h4>
+<ul>
+  <li>Use lawfully for personal growth.</li>
+  <li>Recognize suggestions are generalized and may not fit your circumstances.</li>
+  <li>Results depend on your engagement and outside factors.</li>
+  <li>No scraping, resale, reverse engineering, or abuse.</li>
+</ul>
+
+<h4>5. No Guarantees</h4>
+<p>Outcomes vary; examples are illustrative only.</p>
+
+<h4>6. Limitation of Liability</h4>
+<p>Service is provided “as is/as available.” We are not liable for direct/indirect/incidental/consequential damages to the fullest extent allowed by law.</p>
+
+<h4>7. IP</h4>
+<p>All content/software are property of Together We Media Group LLC. Limited, personal, non-transferable license to use the platform.</p>
+
+<h4>8. Data & Privacy</h4>
+<p>See our <a href="/privacy">Privacy Policy</a> for collection and use details.</p>
+
+<h4>9. Age</h4>
+<p>Must be 18+ or age of majority.</p>
+
+<h4>10. Indemnification</h4>
+<p>You agree to indemnify us for claims arising from your use or violation of these Terms.</p>
+
+<h4>11. Modifications</h4>
+<p>We may update features and these Terms; continued use means acceptance.</p>
+
+<h4>12. Governing Law</h4>
+<p>Governed by the laws of [Insert State/Country]; disputes in [Insert Jurisdiction].</p>
+
+<p class="muted"><small>By using TogetherWe, you acknowledge you’ve read and agree to these Terms.</small></p>
+      `
+    },
+    "/disclaimer": {
+      title: "Legal Disclaimer",
+      html: `
+<p><strong>TogetherWe is an AI-powered couples coaching and support platform.</strong> It does not provide therapy, counseling, medical advice, diagnosis, or treatment. No licensed therapist or clinician monitors the system.</p>
+
+<ul>
+  <li><strong>AI-Based Support:</strong> Content is informational/educational, not professional advice.</li>
+  <li><strong>No Guarantees:</strong> Results vary; no outcome is promised; examples are illustrative.</li>
+  <li><strong>Not a Substitute:</strong> Not a replacement for therapy, medical care, or crisis services.</li>
+  <li><strong>Crisis:</strong> In emergencies call <strong>911</strong>; in the U.S. dial/text <strong>988</strong> for the Suicide & Crisis Lifeline.</li>
+  <li><strong>Use at Your Own Risk:</strong> You are responsible for your choices and outcomes; we aren’t liable for reliance on AI-generated content.</li>
+</ul>
+      `
+    },
+    "/cookies": {
+      title: "Cookie Policy",
+      html: `
+<p>We use cookies and similar technologies to operate, secure, and improve the site.</p>
+
+<h4>What We Use</h4>
+<ul>
+  <li><strong>Essential:</strong> Required for login, preferences, session stability.</li>
+  <li><strong>Analytics:</strong> Understand usage to improve features (aggregate metrics).</li>
+  <li><strong>Performance/Security:</strong> Load balancing, fraud prevention.</li>
+</ul>
+
+<h4>Your Choices</h4>
+<ul>
+  <li>Browser controls to block or delete cookies (functionality may be limited).</li>
+  <li>Manage consent in the cookie banner when presented.</li>
+</ul>
+
+<p>For details on personal data, see our <a href="/privacy">Privacy Policy</a>.</p>
+      `
+    },
+    "/accessibility": {
+      title: "Accessibility Statement",
+      html: `
+<p>TogetherWe is committed to digital accessibility and strives to meet <strong>WCAG 2.1 AA</strong> guidelines.</p>
+
+<h4>Measures We Take</h4>
+<ul>
+  <li>Semantic HTML, ARIA where needed, keyboard navigation</li>
+  <li>Color contrast checks and scalable text</li>
+  <li>Continuous testing and issue remediation</li>
+</ul>
+
+<h4>Feedback</h4>
+<p>If you encounter accessibility barriers, email <a href="mailto:support@TogetherWe.app">support@TogetherWe.app</a> with a description, page URL, and your browser/device.</p>
+      `
+    },
+    "/privacy-choices": {
+      title: "Privacy Choices",
+      html: `
+<p>Depending on your jurisdiction (e.g., GDPR/CCPA/CPRA), you may have rights to:</p>
+<ul>
+  <li>Access or delete personal data</li>
+  <li>Correct inaccuracies</li>
+  <li>Data portability</li>
+  <li>Opt out of certain processing or marketing</li>
+</ul>
+
+<h4>How to Exercise Your Rights</h4>
+<ul>
+  <li>Email <a href="mailto:privacy@togetherwelove.app">privacy@togetherwelove.app</a> with your request.</li>
+  <li>Include the email linked to your account; we may require verification.</li>
+</ul>
+
+<p>We do not sell personal information. For details, see our <a href="/privacy">Privacy Policy</a>.</p>
+      `
+    },
+    "/about": {
+      title: "About Us",
+      html: `
+<p><strong>TogetherWe</strong> is an AI-powered couples coaching and support platform. We help partners build clarity, communicate better, and notice patterns earlier with structured, privacy-conscious tools.</p>
+
+<h4>Company</h4>
+<p>TogetherWe Media Group LLC<br>3225 Mcleod Drive, Suite 100<br>Las Vegas, NV 89121</p>
+
+<h4>Contact</h4>
+<p><a href="mailto:support@TogetherWe.app">support@TogetherWe.app</a></p>
+      `
+    },
+    "/faq": {
+      title: "FAQ",
+      html: `
+<h4>What is TogetherWe?</h4>
+<p>An AI coaching and support platform for couples. Not therapy or medical care.</p>
+
+<h4>Is a human professional reviewing my inputs?</h4>
+<p>No. Interactions are AI-generated; no clinician monitors your use.</p>
+
+<h4>Can TogetherWe replace therapy?</h4>
+<p>No. It complements professional care but is not a substitute.</p>
+
+<h4>Do you guarantee results?</h4>
+<p>No. Results vary by individual use and circumstances.</p>
+
+<h4>How is my data handled?</h4>
+<p>See our <a href="/privacy">Privacy Policy</a>. We don't sell personal data.</p>
+
+<h4>What if I’m in crisis?</h4>
+<p>Call <strong>911</strong>. In the U.S., dial/text <strong>988</strong> for the Suicide & Crisis Lifeline.</p>
+      `
+    },
+    "/investors": {
+      title: "Investors",
+      html: `
+<p>For investor inquiries, media kits, and deck access, contact <a href="mailto:support@TogetherWe.app">support@TogetherWe.app</a>.</p>
+<p>Company: TogetherWe Media Group LLC &middot; 3225 Mcleod Drive, Suite 100, Las Vegas, NV 89121</p>
+<p class="muted"><small>Note: materials may be provided under NDA. This is not an offer to sell securities.</small></p>
+      `
+    },
+    "/contact": {
+      title: "Contact",
+      html: `
+<p>Email us at <a href="mailto:support@TogetherWe.app">support@TogetherWe.app</a> or write to:</p>
+<p>TogetherWe Media Group LLC<br>3225 Mcleod Drive, Suite 100<br>Las Vegas, NV 89121</p>
+      `
+    }
+  };
+
+  // Wire up footer links to open the modal
+  (function setupTWPopups(){
+    const backdrop = document.getElementById('tw-backdrop');
+    const modal = document.getElementById('tw-modal');
+    const title = document.getElementById('tw-modal-title');
+    const content = document.getElementById('tw-modal-content');
+    const closeBtn = document.getElementById('tw-close');
+
+    function openModal(path){
+      const page = TW_PAGES[path];
+      if(!page) return false;
+      title.textContent = page.title;
+      content.innerHTML = page.html;
+      backdrop.style.display = 'block';
+      modal.style.display = 'block';
+      modal.focus();
+      return true;
+    }
+    function closeModal(){
+      modal.style.display = 'none';
+      backdrop.style.display = 'none';
+    }
+    backdrop.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Intercept footer link clicks
+    const footer = document.getElementById('site-footer');
+    if (!footer) return;
+    footer.addEventListener('click', e => {
+      const a = e.target.closest('a');
+      if(!a) return;
+      const href = a.getAttribute('href');
+      if (href && TW_PAGES[href]) {
+        e.preventDefault();
+        openModal(href);
+      }
+    });
+  })();
+</script>
+<!-- ===== /TogetherWe Popups ===== -->
+</body>
+</html>
