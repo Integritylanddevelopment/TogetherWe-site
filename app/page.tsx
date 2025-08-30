@@ -1,9 +1,46 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import Navigation from "../components/navigation"
 
 export default function HomePage() {
+  const [email, setEmail] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [error, setError] = useState("")
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setError("")
+
+    try {
+      const response = await fetch('/api/beta-signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          source: 'homepage'
+        })
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setIsSuccess(true)
+        setEmail("")
+      } else {
+        setError(data.error || "Something went wrong. Please try again.")
+      }
+    } catch (err) {
+      setError("Network error. Please check your connection and try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
   return (
     <div>
       <Navigation />
@@ -74,24 +111,39 @@ export default function HomePage() {
               </p>
             </div>
 
-            <form id="beta-signup-form" className="beta-form" aria-label="Beta signup form">
+            <form onSubmit={handleSubmit} className="beta-form" aria-label="Beta signup form">
               <input
                 type="email"
-                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
                 required
                 className="beta-input"
                 aria-label="Email address"
                 autoComplete="email"
+                disabled={isSubmitting}
               />
-              <button type="submit" className="beta-btn" aria-label="Claim your early access">
-                Claim Your Early Access Now
+              <button 
+                type="submit" 
+                className="beta-btn" 
+                aria-label="Claim your early access"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Signing up..." : "Claim Your Early Access Now"}
               </button>
             </form>
 
-            <div id="beta-signup-success" className="beta-success" role="status" aria-live="polite">
-              Thank you! You're on the list. We'll be in touch soon.
-            </div>
+            {error && (
+              <div className="beta-error" role="alert" aria-live="polite">
+                {error}
+              </div>
+            )}
+
+            {isSuccess && (
+              <div className="beta-success" role="status" aria-live="polite">
+                Thank you! You're on the list. We'll be in touch soon.
+              </div>
+            )}
 
             <div className="supporting-line beta-supporting">
               Now Beta Testing: Only 500 couples will get in. Claim your spot before they're gone.
@@ -403,12 +455,32 @@ export default function HomePage() {
         }
 
         .beta-success {
-          display: none;
           background: #d4edda;
           color: #155724;
           padding: 1rem;
           border-radius: 8px;
           text-align: center;
+          margin-bottom: 1rem;
+        }
+
+        .beta-error {
+          background: #f8d7da;
+          color: #721c24;
+          padding: 1rem;
+          border-radius: 8px;
+          text-align: center;
+          margin-bottom: 1rem;
+          border: 1px solid #f5c6cb;
+        }
+
+        .beta-btn:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        .beta-input:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
         }
 
         .beta-supporting {
